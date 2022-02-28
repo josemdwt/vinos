@@ -50,9 +50,7 @@ Route::get('/wines/denominations', function () {
 });
 
 Route::get('/wines/{type}', function ($type) {
-
-    $wines = Wine::type($type)->get();
-    return $wines;
+    return Wine::type($type)->get();
 });
 
 Route::get('categories', function () {
