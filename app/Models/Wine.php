@@ -9,10 +9,32 @@ class Wine extends Model
 {
     use HasFactory;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var string[]
+     */
+    protected $fillable = [
+        'name',
+        'description',
+        'date_elaboration',
+        'alcohol_content',
+        'price',
+        'stock',
+        'type',
+        'category_id',
+        'country_id',
+        'denomination_id',
+    ];
 
     public function categories()
     {
-        return $this->belongsTo(Category::class);
+        return $this->hasMany(Category::class);
+    }
+
+    public function countries()
+    {
+        return $this->hasOne(Country::class);
     }
 
 }
