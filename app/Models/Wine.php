@@ -44,4 +44,9 @@ class Wine extends Model
         return $this->belongsTo(Denomination::class, 'denomination_id');
     }
 
+    public static function type($type)
+    {
+        return self::where('type', '=' , $type);
+    }
+
 }

@@ -49,6 +49,12 @@ Route::get('/wines/denominations', function () {
     return Wine::with('denominations')->get();
 });
 
+Route::get('/wines/{type}', function ($type) {
+
+    $wines = Wine::type($type)->get();
+    return $wines;
+});
+
 Route::get('categories', function () {
     return Category::get();
 });
@@ -60,6 +66,7 @@ Route::get('countries', function () {
 Route::get('denominations', function () {
     return Denomination::get();
 });
+
 
 Route::get('/wine/{id}', function ($id) {
     return Wine::find($id);
