@@ -4,6 +4,9 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Models\Wine;
+use App\Models\Category;
+use App\Models\Country;
+use App\Models\Denomination;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,7 +34,31 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 
 Route::get('/wines', function () {
-    return Wine::all();
+    return Wine::with('categories')->with('countries')->with('denominations')->get();
+});
+
+Route::get('/wines/categories', function () {
+    return Wine::with('categories')->get();
+});
+
+Route::get('/wines/countries', function () {
+    return Wine::with('countries')->get();
+});
+
+Route::get('/wines/denominations', function () {
+    return Wine::with('denominations')->get();
+});
+
+Route::get('categories', function () {
+    return Category::get();
+});
+
+Route::get('countries', function () {
+    return Country::get();
+});
+
+Route::get('denominations', function () {
+    return Denomination::get();
 });
 
 Route::get('/wine/{id}', function ($id) {

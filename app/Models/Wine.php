@@ -29,12 +29,19 @@ class Wine extends Model
 
     public function categories()
     {
-        return $this->hasMany(Category::class);
+        return $this->belongsTo(Category::class, 'category_id');
     }
+
 
     public function countries()
     {
-        return $this->hasOne(Country::class);
+        return $this->belongsTo(Country::class, 'country_id');
+    }
+
+
+    public function denominations()
+    {
+        return $this->belongsTo(Denomination::class, 'denomination_id');
     }
 
 }
