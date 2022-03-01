@@ -33,9 +33,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 
-Route::get('/wines', function () {
-    return Wine::with('categories')->with('countries')->with('denominations')->get();
-});
+Route::get('/wines', 'WineController@index');
 
 Route::get('/wines/categories', function () {
     return Wine::with('categories')->get();
@@ -54,7 +52,7 @@ Route::get('/wines/{type}', function ($type) {
 });
 
 Route::get('categories', function () {
-    return Category::get();
+    return Category::orderBy('id', 'desc')->get();
 });
 
 Route::get('countries', function () {
