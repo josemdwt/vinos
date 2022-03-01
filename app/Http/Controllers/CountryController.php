@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Country;
 use Illuminate\Http\Request;
-use App\Models\Wine;
 
-class WineController extends Controller
+class CountryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,43 +14,7 @@ class WineController extends Controller
      */
     public function index()
     {
-        $payload = Wine::with('categories')->with('countries')->with('denominations')->get();
-
-        return $payload;
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function categories()
-    {
-        $payload = Wine::with('categories')->get();
-
-        return $payload;
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function countries()
-    {
-        $payload = Wine::with('countries')->get();
-
-        return $payload;
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function denominations()
-    {
-        $payload = Wine::with('denominations')->get();
+        $payload = Country::all();
 
         return $payload;
     }
@@ -84,7 +48,7 @@ class WineController extends Controller
      */
     public function show($id)
     {
-        return Wine::find($id);
+        //
     }
 
     /**

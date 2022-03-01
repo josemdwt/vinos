@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CountryController;
+use App\Http\Controllers\WineController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -32,20 +34,16 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->name('dashboard');
 
+Route::controller(WineController::class)->prefix('wines')->group(function () {
+    Route::get('/', 'index');
+    Route::get('/categories', 'categories');
+    Route::get('/countries', 'countries');
+    Route::get('/denominations', 'denominations');
+    Route::get('/{id}', 'show');
 
-Route::get('/wines', 'WineController@index');
-
-Route::get('/wines/categories', function () {
-    return Wine::with('categories')->get();
 });
 
-Route::get('/wines/countries', function () {
-    return Wine::with('countries')->get();
-});
-
-Route::get('/wines/denominations', function () {
-    return Wine::with('denominations')->get();
-});
+Route::get('countries', [CountryController::class,'index' ]);
 
 Route::get('/wines/{type}', function ($type) {
     return Wine::type($type)->get();
@@ -55,17 +53,9 @@ Route::get('categories', function () {
     return Category::orderBy('id', 'desc')->get();
 });
 
-Route::get('countries', function () {
-    return Country::get();
-});
 
 Route::get('denominations', function () {
-    return Denomination::get();
-});
-
-
-Route::get('/wine/{id}', function ($id) {
-    return Wine::find($id);
+    return Denomination::select('name')->get();
 });
 
 
