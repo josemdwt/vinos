@@ -46,7 +46,9 @@ Route::controller(WineController::class)->prefix('wines')->group(function () {
 Route::get('countries', [CountryController::class,'index' ]);
 
 Route::get('/wines/{type}', function ($type) {
-    return Wine::type($type)->get();
+
+    $wines = Wine::type($type)->get();
+    return $wines;
 });
 
 Route::get('categories', function () {
