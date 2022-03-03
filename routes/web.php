@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\WineController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -51,9 +52,7 @@ Route::get('/wines/{type}', function ($type) {
     return $wines;
 });
 
-Route::get('categories', function () {
-    return Category::orderBy('id', 'desc')->get();
-});
+Route::get('/categories', [CategoryController::class, 'index']);
 
 
 Route::get('denominations', function () {
